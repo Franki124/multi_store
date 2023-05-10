@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "247416658912",
+    "project_id": "multi-store-9c5d7",
+    "storage_bucket": "multi-store-9c5d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247416658912:android:3f332c0acedd14e1bce985",
+        "android_client_info": {
+          "package_name": "com.franki.multi_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247416658912-jmrse8veq2ve3jgv1ib5fm53jc0jsgqq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.franki.multi_store",
+            "certificate_hash": "cc9a07bb9d059d04974f98be03956fde5a57b4b8"
+          }
+        },
+        {
+          "client_id": "247416658912-642o2c2biqfgjecpcsk8aclt79sp34ah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI2D-I3P99GWV_HwgV71kcW5rwQrAtXiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247416658912-642o2c2biqfgjecpcsk8aclt79sp34ah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
