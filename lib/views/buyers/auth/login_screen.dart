@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_store/controllers/auth_controller.dart';
 import 'package:multi_store/utils/show_snackBar.dart';
+import 'package:multi_store/views/buyers/auth/register_screen.dart';
 import 'package:multi_store/views/buyers/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -107,7 +108,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Need An Account?"),
-                  TextButton(onPressed: () {}, child: Text("Register"))
+                  TextButton(onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context){
+                      return RegisterScreen();
+                    }));
+                  }, child: Text("Register"))
                 ],
               )
             ],
