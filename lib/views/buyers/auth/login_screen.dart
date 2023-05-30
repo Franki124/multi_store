@@ -4,7 +4,6 @@ import 'package:multi_store/utils/show_snackBar.dart';
 import 'package:multi_store/views/buyers/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -18,11 +17,12 @@ class _LoginScreenState extends State<LoginScreen> {
   late String password;
 
   _loginUsers() async {
-    if(_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       String res = await _authController.loginUsers(email, password);
 
-      if(res == "Success") {
-        return Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+      if (res == "Success") {
+        return Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) {
           return MainScreen();
         }));
       } else {
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     } else {
                       return null;
                     }
-                },
+                  },
                   onChanged: (value) {
                     password = value;
                   },
