@@ -17,7 +17,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   late String password;
 
+  bool _isLoading = false;
+
   _loginUsers() async {
+    setState(() {
+      _isLoading = true;
+    });
     if (_formKey.currentState!.validate()) {
       String res = await _authController.loginUsers(email, password);
 
@@ -30,6 +35,9 @@ class _LoginScreenState extends State<LoginScreen> {
         return showSnack(context, res);
       }
     } else {
+      setState(() {
+        _isLoading = false;
+      });
       return showSnack(context, "Please provide valid information");
     }
   }
@@ -66,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: TextFormField(
+                  obscureText: true,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please provide password";
@@ -93,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.blue.shade900,
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
-                    child: Text(
+                    child: _isLoading ? CircularProgressIndicator(color: Colors.white): Text(
                       "Login",
                       style: TextStyle(
                           color: Colors.white,
