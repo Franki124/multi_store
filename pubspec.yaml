@@ -46,6 +46,7 @@ dependencies:
   flutterfire_ui: ^0.4.3+20
   country_state_city_picker: ^1.2.8
   flutter_easyloading: ^3.0.5
+  date_time_picker: ^2.1.0
 
 dev_dependencies:
   flutter_test:
