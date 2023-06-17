@@ -26,9 +26,9 @@ class _BuyerRegisterScreenState extends State<BuyerRegisterScreen> {
 
   late String password;
 
+  late Uint8List ? _image;
   bool _isLoading = false;
 
-  late Uint8List ? _image;
 
   _signUpUser() async {
     setState(() {
@@ -82,7 +82,7 @@ class _BuyerRegisterScreenState extends State<BuyerRegisterScreen> {
                 ),
                 Stack(
                   children: [
-                    _image!= null? CircleAvatar(
+                    _image!= null ? CircleAvatar(
                       radius: 64,
                       backgroundColor: Colors.blue.shade900,
                       backgroundImage: MemoryImage(_image!),

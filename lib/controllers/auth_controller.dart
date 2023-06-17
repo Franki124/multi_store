@@ -49,7 +49,7 @@ class AuthController {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
 
-            String profileUrl = await _uploadProfileImageToStorage(image);
+        String profileUrl = await _uploadProfileImageToStorage(image);
 
         await _firestore.collection("buyers").doc(cred.user!.uid).set({
           "email": email,
