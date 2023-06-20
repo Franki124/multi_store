@@ -26,9 +26,9 @@ class _BuyerRegisterScreenState extends State<BuyerRegisterScreen> {
 
   late String password;
 
-  late Uint8List ? _image;
-  bool _isLoading = false;
+  Uint8List? _image;
 
+  bool _isLoading = false;
 
   _signUpUser() async {
     setState(() {
@@ -58,14 +58,6 @@ class _BuyerRegisterScreenState extends State<BuyerRegisterScreen> {
     });
   }
 
-  selectCameraImage() async {
-    Uint8List im = await _authController.pickImage(ImageSource.camera);
-
-    setState(() {
-      _image = im;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +81,7 @@ class _BuyerRegisterScreenState extends State<BuyerRegisterScreen> {
                     ): CircleAvatar(
                       radius: 64,
                       backgroundColor: Colors.blue.shade900,
-                      backgroundImage: NetworkImage("https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"),
+                      backgroundImage: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'),
                     ),
                     Positioned(
                       right: 0,
