@@ -41,6 +41,7 @@ class UploadScreen extends StatelessWidget {
             print(_productProvider.productData["productQuantity"]);
             print(_productProvider.productData["productCategory"]);
             print(_productProvider.productData["productDescription"]);
+            print(_productProvider.productData["imageUrlList"]);
           }, child: Text("Save")),
         ),
       ),
