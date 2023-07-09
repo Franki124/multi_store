@@ -7,7 +7,10 @@ class AttributesScreen extends StatefulWidget {
   State<AttributesScreen> createState() => _AttributesScreenState();
 }
 
-class _AttributesScreenState extends State<AttributesScreen> {
+class _AttributesScreenState extends State<AttributesScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   final TextEditingController _sizeController = TextEditingController();
   bool _entered = false;
   List<String> _sizeList = [];
@@ -15,6 +18,7 @@ class _AttributesScreenState extends State<AttributesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final ProductProvider _productProvider =
         Provider.of<ProductProvider>(context);
     return Padding(
@@ -22,6 +26,13 @@ class _AttributesScreenState extends State<AttributesScreen> {
       child: Column(
         children: [
           TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Enter brand name';
+              } else {
+                return null;
+              }
+            },
             onChanged: (value) {
               _productProvider.getFormData(brandName: value);
             },

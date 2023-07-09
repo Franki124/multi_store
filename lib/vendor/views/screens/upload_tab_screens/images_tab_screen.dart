@@ -13,7 +13,11 @@ class ImagesScreen extends StatefulWidget {
   State<ImagesScreen> createState() => _ImagesScreenState();
 }
 
-class _ImagesScreenState extends State<ImagesScreen> {
+class _ImagesScreenState extends State<ImagesScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   final ImagePicker picker = ImagePicker();
 
   final FirebaseStorage _storage = FirebaseStorage.instance;
@@ -36,16 +40,20 @@ class _ImagesScreenState extends State<ImagesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ProductProvider _productProvider = Provider.of<ProductProvider>(context);
+    super.build(context);
+    final ProductProvider _productProvider =
+        Provider.of<ProductProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
         children: [
           GridView.builder(
-            shrinkWrap: true,
+              shrinkWrap: true,
               itemCount: _image.length + 1,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, mainAxisSpacing: 8, childAspectRatio: 3 / 3),
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 3 / 3),
               itemBuilder: (context, index) {
                 return index == 0
                     ? Center(
@@ -58,27 +66,33 @@ class _ImagesScreenState extends State<ImagesScreen> {
                       )
                     : Container(
                         decoration: BoxDecoration(
-                            image:
-                                DecorationImage(image: FileImage(_image[index - 1]))),
+                            image: DecorationImage(
+                                image: FileImage(_image[index - 1]))),
                       );
               }),
           SizedBox(height: 30),
-          TextButton(onPressed: () async {
-            EasyLoading.show(status: 'Saving Image');
-            for (var img in _image) {
-              Reference ref = _storage.ref().child("productImage").child(Uuid().v4());
+          TextButton(
+              onPressed: () async {
+                EasyLoading.show(status: 'Saving Image');
+                for (var img in _image) {
+                  Reference ref =
+                      _storage.ref().child("productImage").child(Uuid().v4());
 
-              await ref.putFile(img).whenComplete(() async {
-                await ref.getDownloadURL().then((value) {
-                  setState(() {
-                    _imageUrlList.add(value);
-                    _productProvider.getFormData(imageUrlList: _imageUrlList);
-                    EasyLoading.dismiss();
+                  await ref.putFile(img).whenComplete(() async {
+                    await ref.getDownloadURL().then((value) {
+                      setState(() {
+                        _imageUrlList.add(value);
+                      });
+                    });
                   });
+                }
+                setState(() {
+                  _productProvider.getFormData(
+                      imageUrlList: _imageUrlList);
+                  EasyLoading.dismiss();
                 });
-              });
-            }
-          }, child: Text("Upload"))
+              },
+              child: _image.isNotEmpty ? Text("Upload") : Text(''))
         ],
       ),
     );

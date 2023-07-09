@@ -8,12 +8,18 @@ class ShippingScreen extends StatefulWidget {
   State<ShippingScreen> createState() => _ShippingScreenState();
 }
 
-class _ShippingScreenState extends State<ShippingScreen> {
+class _ShippingScreenState extends State<ShippingScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   bool? _chargeShipping = false;
 
   @override
   Widget build(BuildContext context) {
-    final ProductProvider _productProvider = Provider.of<ProductProvider>(context);
+    super.build(context);
+    final ProductProvider _productProvider =
+        Provider.of<ProductProvider>(context);
     return Column(
       children: [
         CheckboxListTile(
@@ -29,11 +35,18 @@ class _ShippingScreenState extends State<ShippingScreen> {
                 _productProvider.getFormData(chargeShipping: _chargeShipping);
               });
             }),
-        if(_chargeShipping == true)
+        if (_chargeShipping == true)
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextFormField(
-              onChanged: (value){
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Enter shipping charge';
+                } else {
+                  return null;
+                }
+              },
+              onChanged: (value) {
                 _productProvider.getFormData(shippingCharge: int.parse(value));
               },
               keyboardType: TextInputType.number,

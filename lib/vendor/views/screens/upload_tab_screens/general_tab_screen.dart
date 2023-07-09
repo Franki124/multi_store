@@ -9,7 +9,11 @@ class GeneralScreen extends StatefulWidget {
   State<GeneralScreen> createState() => _GeneralScreenState();
 }
 
-class _GeneralScreenState extends State<GeneralScreen> {
+class _GeneralScreenState extends State<GeneralScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final List<String> _categoryList = [];
 
@@ -40,6 +44,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final ProductProvider _productProvider =
         Provider.of<ProductProvider>(context);
     return Scaffold(
@@ -49,6 +54,13 @@ class _GeneralScreenState extends State<GeneralScreen> {
           child: Column(
             children: [
               TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Enter product name';
+                  } else {
+                    return null;
+                  }
+                },
                 onChanged: (value) {
                   _productProvider.getFormData(productName: value);
                 },
@@ -58,9 +70,17 @@ class _GeneralScreenState extends State<GeneralScreen> {
               ),
               SizedBox(height: 30),
               TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Enter product price';
+                  } else {
+                    return null;
+                  }
+                },
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
-                  _productProvider.getFormData(productPrice: double.parse(value));
+                  _productProvider.getFormData(
+                      productPrice: double.parse(value));
                 },
                 decoration: InputDecoration(
                   labelText: "Enter product price",
@@ -68,9 +88,17 @@ class _GeneralScreenState extends State<GeneralScreen> {
               ),
               SizedBox(height: 30),
               TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Enter product quantity';
+                  } else {
+                    return null;
+                  }
+                },
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
-                  _productProvider.getFormData(productQuantity: int.parse(value));
+                  _productProvider.getFormData(
+                      productQuantity: int.parse(value));
                 },
                 decoration: InputDecoration(
                   labelText: "Enter product quantity",
@@ -89,6 +117,13 @@ class _GeneralScreenState extends State<GeneralScreen> {
                   }),
               SizedBox(height: 30),
               TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Enter product description';
+                  } else {
+                    return null;
+                  }
+                },
                 onChanged: (value) {
                   _productProvider.getFormData(productDescription: value);
                 },
@@ -101,24 +136,24 @@ class _GeneralScreenState extends State<GeneralScreen> {
                       borderRadius: BorderRadius.circular(10)),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 TextButton(
                     onPressed: () {
                       showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(5000)).then((value) {
-                            setState(() {
-                              _productProvider.getFormData(scheduleDate: value);
-                            });
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(5000))
+                          .then((value) {
+                        setState(() {
+                          _productProvider.getFormData(scheduleDate: value);
+                        });
                       });
                     },
                     child: Text("Schedule")),
                 if (_productProvider.productData['scheduleDate'] != null)
-                  Text(formatedDate(_productProvider.productData["scheduleDate"])),
+                  Text(formatedDate(
+                      _productProvider.productData["scheduleDate"])),
               ])
             ],
           ),
