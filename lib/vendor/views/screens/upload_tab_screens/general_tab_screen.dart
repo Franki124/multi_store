@@ -54,6 +54,7 @@ class _GeneralScreenState extends State<GeneralScreen>
           child: Column(
             children: [
               TextFormField(
+                keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Enter product name';
@@ -117,6 +118,7 @@ class _GeneralScreenState extends State<GeneralScreen>
                   }),
               SizedBox(height: 30),
               TextFormField(
+                keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Enter product description';

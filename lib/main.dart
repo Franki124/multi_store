@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: "Brand-Bold"
       ),
-      home: MainVendorScreen(),
+      home: MainScreen(),
       builder: EasyLoading.init(),
     );
   }

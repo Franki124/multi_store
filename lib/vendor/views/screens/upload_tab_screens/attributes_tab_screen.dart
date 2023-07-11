@@ -26,6 +26,7 @@ class _AttributesScreenState extends State<AttributesScreen>
       child: Column(
         children: [
           TextFormField(
+            keyboardType: TextInputType.text,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Enter brand name';
@@ -48,6 +49,7 @@ class _AttributesScreenState extends State<AttributesScreen>
                 child: Container(
                   width: 100,
                   child: TextFormField(
+                    keyboardType: TextInputType.text,
                     controller: _sizeController,
                     onChanged: (value) {
                       setState(() {
