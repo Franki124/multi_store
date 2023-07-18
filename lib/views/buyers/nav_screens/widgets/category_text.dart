@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_store/views/buyers/nav_screens/widgets/home_products.dart';
+import 'package:multi_store/views/buyers/nav_screens/widgets/main_products_widget.dart';
 
 class CategoryText extends StatefulWidget {
   @override
@@ -35,7 +36,11 @@ class _CategoryTextState extends State<CategoryText> {
               }
 
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Text("Loading categories");
+                return Center(
+                  child: LinearProgressIndicator(
+                    color: Colors.blue.shade900,
+                  ),
+                );
               }
 
               return Container(
@@ -75,6 +80,8 @@ class _CategoryTextState extends State<CategoryText> {
               );
             },
           ),
+          if(_selectedCategory == null) MainProductsWidget(),
+
           if(_selectedCategory != null)
             HomeProductWidget(categoryName: _selectedCategory!)
         ],
