@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -71,6 +72,7 @@ class UploadScreen extends StatelessWidget {
                       'brandName': _productProvider.productData['brandName'],
                       'scheduleDate':
                           _productProvider.productData['scheduleDate'],
+                      'vendorID': FirebaseAuth.instance.currentUser!.uid,
                     }).whenComplete(() {
                       _productProvider.clearData();
                       EasyLoading.dismiss();

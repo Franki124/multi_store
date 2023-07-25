@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_store/provider/cart_provider.dart';
+import 'package:multi_store/utils/show_snackBar.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final dynamic productData;
@@ -25,6 +28,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final CartProvider _cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -162,29 +166,48 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
       bottomSheet: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Container(
-          height: 50,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              color: Colors.blue.shade900,
-              borderRadius: BorderRadius.circular(10)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.shopping_cart, color: Colors.white, size: 24),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('Add to cart',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        letterSpacing: 1.5)),
-              ),
-            ],
+        child: InkWell(
+          onTap: () {
+            if (_selectedSize == null) {
+              return showSnack(context, 'Please select size');
+            } else {
+              _cartProvider.addProductToCart(
+                  widget.productData['productName'],
+                  widget.productData['productID'],
+                  widget.productData['imageUrlList'],
+                  1,
+                  widget.productData['productQuantity'],
+                  widget.productData['productPrice'],
+                  widget.productData['vendorID'],
+                  _selectedSize!,
+                  widget.productData['scheduleDate']);
+            }
+          },
+          child: Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                color: Colors.blue.shade900,
+                borderRadius: BorderRadius.circular(10)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:
+                      Icon(Icons.shopping_cart, color: Colors.white, size: 24),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('Add to cart',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          letterSpacing: 1.5)),
+                ),
+              ],
+            ),
           ),
         ),
       ),
