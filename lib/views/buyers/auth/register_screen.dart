@@ -17,7 +17,6 @@ class _BuyerRegisterScreenState extends State<BuyerRegisterScreen> {
 
   final AuthController _authController = AuthController();
 
-
   late String email;
 
   late String fullName;
@@ -39,7 +38,10 @@ class _BuyerRegisterScreenState extends State<BuyerRegisterScreen> {
           .signUpUsers(email, fullName, phoneNumber, password, _image)
           .whenComplete(() {
         _formKey.currentState!.reset();
-        _isLoading = false;
+        _image!.clear();
+        setState(() {
+          _isLoading = false;
+        });
       });
       return showSnack(context, "Congratulations, account has been created");
     } else {
@@ -74,24 +76,28 @@ class _BuyerRegisterScreenState extends State<BuyerRegisterScreen> {
                 ),
                 Stack(
                   children: [
-                    _image!= null ? CircleAvatar(
-                      radius: 64,
-                      backgroundColor: Colors.blue.shade900,
-                      backgroundImage: MemoryImage(_image!),
-                    ): CircleAvatar(
-                      radius: 64,
-                      backgroundColor: Colors.blue.shade900,
-                      backgroundImage: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'),
-                    ),
+                    _image != null
+                        ? CircleAvatar(
+                            radius: 64,
+                            backgroundColor: Colors.blue.shade900,
+                            backgroundImage: MemoryImage(_image!),
+                          )
+                        : CircleAvatar(
+                            radius: 64,
+                            backgroundColor: Colors.blue.shade900,
+                            backgroundImage: NetworkImage(
+                                'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'),
+                          ),
                     Positioned(
                       right: 0,
-                        top: 0,
-                        child: IconButton(
-                      onPressed: () {
-                        selectGalleryImage();
-                      },
-                      icon: Icon(CupertinoIcons.plus, color: Colors.white),
-                    ))
+                      top: 0,
+                      child: IconButton(
+                        onPressed: () {
+                          selectGalleryImage();
+                        },
+                        icon: Icon(CupertinoIcons.plus, color: Colors.white),
+                      ),
+                    ),
                   ],
                 ),
                 Padding(

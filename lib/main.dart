@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutterfire_ui/auth.dart';
 import 'package:multi_store/provider/cart_provider.dart';
 import 'package:multi_store/provider/product_provider.dart';
 import 'package:multi_store/vendor/views/screens/main_vendor_screen.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: "Brand-Bold"
       ),
-      home: MainScreen(),
+      home: BuyerRegisterScreen(),
       builder: EasyLoading.init(),
     );
   }
