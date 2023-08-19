@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: "Brand-Bold"
       ),
-      home: BuyerRegisterScreen(),
+      home: MainScreen(),
       builder: EasyLoading.init(),
     );
   }
