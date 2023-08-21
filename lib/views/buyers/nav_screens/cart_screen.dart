@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_store/provider/cart_provider.dart';
+import 'package:multi_store/views/buyers/inner_screens/checkout_screen.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatelessWidget {
@@ -155,24 +156,33 @@ class CartScreen extends StatelessWidget {
 
       bottomSheet: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 50,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.blue.shade900,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: Center(
-            child: Text(
-              '\$ ' +
-                  _cartProvider.totalPrice.toStringAsFixed(2) +
-                  ' ' +
-                  'Checkout',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5),
+        child: InkWell(
+          onTap: _cartProvider.totalPrice == 0.00
+              ? null
+              : () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CheckoutScreen();
+                  }));
+                },
+          child: Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: _cartProvider.totalPrice == 0.00 ? Colors.grey.shade700 : Colors.blue.shade900,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Center(
+              child: Text(
+                '\$ ' +
+                    _cartProvider.totalPrice.toStringAsFixed(2) +
+                    ' ' +
+                    'Checkout',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5),
+              ),
             ),
           ),
         ),

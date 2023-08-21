@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_store/views/buyers/nav_screens/category_screen.dart';
 import 'package:multi_store/views/buyers/nav_screens/widgets/home_products.dart';
 import 'package:multi_store/views/buyers/nav_screens/widgets/main_products_widget.dart';
 
@@ -74,7 +75,11 @@ class _CategoryTextState extends State<CategoryText> {
                               );
                             })),
                     IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_forward_ios)),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return CategoryScreen();
+                          }));
+                        }, icon: Icon(Icons.arrow_forward_ios)),
                   ],
                 ),
               );
