@@ -5,8 +5,10 @@ import 'package:multi_store/views/buyers/productDetail/product_detail_screen.dar
 class MainProductsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _productsStream =
-        FirebaseFirestore.instance.collection('products').snapshots();
+    final Stream<QuerySnapshot> _productsStream = FirebaseFirestore.instance
+        .collection('products')
+        .where('approved', isEqualTo: true)
+        .snapshots();
     return StreamBuilder<QuerySnapshot>(
       stream: _productsStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -45,8 +47,8 @@ class MainProductsWidget extends StatelessWidget {
                         width: 200,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image:
-                                    NetworkImage(productData['imageUrlList'][0]),
+                                image: NetworkImage(
+                                    productData['imageUrlList'][0]),
                                 fit: BoxFit.cover)),
                       ),
                       Padding(

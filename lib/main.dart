@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:multi_store/provider/cart_provider.dart';
 import 'package:multi_store/provider/product_provider.dart';
 import 'package:multi_store/vendor/views/screens/main_vendor_screen.dart';
+import 'package:multi_store/views/buyers/auth/login_screen.dart';
 import 'package:multi_store/views/buyers/auth/register_screen.dart';
 import 'package:multi_store/views/buyers/main_screen.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: "Brand-Bold"
       ),
-      home: MainScreen(),
+      home: LoginScreen(),
       builder: EasyLoading.init(),
     );
   }

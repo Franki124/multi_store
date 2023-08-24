@@ -13,6 +13,7 @@ class AllProductScreen extends StatelessWidget {
     final Stream<QuerySnapshot> _productStream = FirebaseFirestore.instance
         .collection('products')
         .where('productCategory', isEqualTo: categoryData['categoryName'])
+        .where('approved', isEqualTo: true)
         .snapshots();
 
     return Scaffold(
@@ -51,9 +52,11 @@ class AllProductScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final productData = snapshot.data!.docs[index];
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ProductDetailScreen(productData: productData,);
+                    return ProductDetailScreen(
+                      productData: productData,
+                    );
                   }));
                 },
                 child: Card(

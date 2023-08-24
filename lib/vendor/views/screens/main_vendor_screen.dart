@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_store/vendor/views/screens/earnings_screen.dart';
 import 'package:multi_store/vendor/views/screens/edit_product_screen.dart';

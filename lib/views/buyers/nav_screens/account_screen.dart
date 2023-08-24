@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_store/views/buyers/auth/login_screen.dart';
+import 'package:multi_store/views/buyers/inner_screens/edit_profile_screen.dart';
 
 class AccountScreen extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -63,6 +64,31 @@ class AccountScreen extends StatelessWidget {
                   child: Text(
                     data["email"],
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return EditProfileScreen(userData: data);
+                    }));
+                  },
+                  child: Container(
+                    height: 40,
+                    width: MediaQuery.of(context).size.width - 200,
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade900,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Edit Profile',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 Padding(

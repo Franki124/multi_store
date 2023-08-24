@@ -28,132 +28,145 @@ class CartScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: _cartProvider.getCartItem.length,
-          itemBuilder: (context, index) {
-            final cartData = _cartProvider.getCartItem.values.toList()[index];
-            return Card(
-              child: SizedBox(
-                height: 170,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      height: 150,
-                      width: 150,
-                      child: Image.network(cartData.imageUrl[0]),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(cartData.productName,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold)),
-                          Text('\$ ' + cartData.price.toStringAsFixed(2),
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green.shade900)),
-                          OutlinedButton(
-                            onPressed: null,
-                            child: Text(
-                              cartData.productSize,
-                            ),
-                          ),
-                          Row(
+      body: _cartProvider.getCartItem.isNotEmpty
+          ? ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: _cartProvider.getCartItem.length,
+              itemBuilder: (context, index) {
+                final cartData =
+                    _cartProvider.getCartItem.values.toList()[index];
+                return Card(
+                  child: SizedBox(
+                    height: 170,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Image.network(cartData.imageUrl[0]),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                height: 40,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  color: Colors.blue.shade900,
-                                ),
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: cartData.quantity == 1
-                                          ? null
-                                          : () {
-                                              _cartProvider
-                                                  .decreament(cartData);
-                                            },
-                                      icon: Icon(
-                                        CupertinoIcons.minus_circle,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Text(
-                                      cartData.quantity.toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    IconButton(
-                                      onPressed: cartData.availableStock ==
-                                              cartData.quantity
-                                          ? null
-                                          : () {
-                                              _cartProvider
-                                                  .increament(cartData);
-                                            },
-                                      icon: Icon(
-                                        CupertinoIcons.plus_circle,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
+                              Text(cartData.productName,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold)),
+                              Text('\$ ' + cartData.price.toStringAsFixed(2),
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.green.shade900)),
+                              OutlinedButton(
+                                onPressed: null,
+                                child: Text(
+                                  cartData.productSize,
                                 ),
                               ),
-                              IconButton(
-                                onPressed: () {
-                                  _cartProvider.removeItem(cartData.productId);
-                                },
-                                icon: Icon(
-                                  Icons.remove_shopping_cart,
-                                  size: 24,
-                                  color: Colors.red.shade900,
-                                ),
-                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 40,
+                                    width: 120,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4),
+                                      color: Colors.blue.shade900,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: cartData.quantity == 1
+                                              ? null
+                                              : () {
+                                                  _cartProvider
+                                                      .decreament(cartData);
+                                                },
+                                          icon: Icon(
+                                            CupertinoIcons.minus_circle,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Text(
+                                          cartData.quantity.toString(),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: cartData.availableStock ==
+                                                  cartData.quantity
+                                              ? null
+                                              : () {
+                                                  _cartProvider
+                                                      .increament(cartData);
+                                                },
+                                          icon: Icon(
+                                            CupertinoIcons.plus_circle,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      _cartProvider
+                                          .removeItem(cartData.productId);
+                                    },
+                                    icon: Icon(
+                                      Icons.remove_shopping_cart,
+                                      size: 24,
+                                      color: Colors.red.shade900,
+                                    ),
+                                  ),
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            );
-          }),
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Text(
-      //         "Your Shopping Cart is empty",
-      //         style: TextStyle(
-      //             fontSize: 22, fontWeight: FontWeight.bold, letterSpacing: 5),
-      //       ),
-      //       SizedBox(height: 20),
-      //       Container(
-      //         height: 40,
-      //         width: MediaQuery.of(context).size.width - 40,
-      //         decoration: BoxDecoration(
-      //           color: Colors.blue.shade900,
-      //           borderRadius: BorderRadius.circular(10),
-      //         ),
-      //         child: Center(
-      //           child: Text("Continue Shopping", style: TextStyle(fontSize: 18, color: Colors.white),),
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              })
+          : Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Your Shopping Cart is empty",
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 5),
+                  ),
+                  SizedBox(height: 20),
+                  InkWell(
+                    onTap: () {
 
+                    },
+                    child: Container(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width - 40,
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade900,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Continue Shopping",
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
       bottomSheet: Padding(
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
@@ -168,7 +181,9 @@ class CartScreen extends StatelessWidget {
             height: 50,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: _cartProvider.totalPrice == 0.00 ? Colors.grey.shade700 : Colors.blue.shade900,
+              color: _cartProvider.totalPrice == 0.00
+                  ? Colors.grey.shade700
+                  : Colors.blue.shade900,
               borderRadius: BorderRadius.circular(6),
             ),
             child: Center(
