@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:multi_store/vendor/views/screens/vendor_product_detail/vendor_product_detail_screen.dart';
 
 class PublishedTab extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -32,17 +33,10 @@ class PublishedTab extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final vendorProductData = snapshot.data!.docs[index];
                   return Slidable(
-                      // Specify a key if the Slidable is dismissible.
                       key: const ValueKey(0),
-
-                      // The start action pane is the one at the left or the top side.
                       startActionPane: ActionPane(
-                        // A motion is a widget used to control how the pane animates.
                         motion: ScrollMotion(),
-
-                        // All actions are defined in the children parameter.
                         children: [
-                          // A SlidableAction can have an icon and/or a label.
                           SlidableAction(
                             flex: 2,
                             onPressed: (context) async {
@@ -71,39 +65,46 @@ class PublishedTab extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 80,
-                              width: 80,
-                              child: Image.network(
-                                  vendorProductData['imageUrl'][0]),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  vendorProductData['productName'],
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return VendorProductDetailScreen(productData: vendorProductData);
+                          }));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 80,
+                                width: 80,
+                                child: Image.network(
+                                    vendorProductData['imageUrl'][0]),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    vendorProductData['productName'],
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '\$ ' +
-                                      vendorProductData['productPrice']
-                                          .toStringAsFixed(2),
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green.shade900,
+                                  Text(
+                                    '\$ ' +
+                                        vendorProductData['productPrice']
+                                            .toStringAsFixed(2),
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.green.shade900,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ));
                 }),

@@ -32,17 +32,10 @@ class UnpublishedTab extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final vendorProductData = snapshot.data!.docs[index];
                   return Slidable(
-                      // Specify a key if the Slidable is dismissible.
                       key: const ValueKey(0),
-
-                      // The start action pane is the one at the left or the top side.
                       startActionPane: ActionPane(
-                        // A motion is a widget used to control how the pane animates.
                         motion: ScrollMotion(),
-
-                        // All actions are defined in the children parameter.
                         children: [
-                          // A SlidableAction can have an icon and/or a label.
                           SlidableAction(
                             flex: 2,
                             onPressed: (context) async {
