@@ -10,8 +10,10 @@ class EarningsScreen extends StatelessWidget {
     CollectionReference vendors =
         FirebaseFirestore.instance.collection('vendors');
 
-    final Stream<QuerySnapshot> _ordersStream =
-        FirebaseFirestore.instance.collection('orders').snapshots();
+    final Stream<QuerySnapshot> _ordersStream = FirebaseFirestore.instance
+        .collection('orders')
+        .where('vendorId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .snapshots();
 
     return FutureBuilder<DocumentSnapshot>(
       future: vendors.doc(FirebaseAuth.instance.currentUser!.uid).get(),
@@ -100,11 +102,10 @@ class EarningsScreen extends StatelessWidget {
                                 child: Text(
                                   '\$ ' + totalOrder.toStringAsFixed(2),
                                   style: TextStyle(
-                                    color: Colors.green.shade700,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1.5
-                                  ),
+                                      color: Colors.green.shade700,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1.5),
                                 ),
                               ),
                             ],
@@ -138,8 +139,7 @@ class EarningsScreen extends StatelessWidget {
                                       color: Colors.blue.shade700,
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: 1.5
-                                  ),
+                                      letterSpacing: 1.5),
                                 ),
                               ),
                             ],

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_store/views/buyers/auth/login_screen.dart';
 import 'package:multi_store/views/buyers/inner_screens/edit_profile_screen.dart';
+import 'package:multi_store/views/buyers/inner_screens/orders_screen.dart';
 
 class AccountScreen extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -67,8 +68,9 @@ class AccountScreen extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
                       return EditProfileScreen(userData: data);
                     }));
                   },
@@ -108,8 +110,16 @@ class AccountScreen extends StatelessWidget {
                   title: Text("Cart", style: TextStyle(fontSize: 20)),
                 ),
                 ListTile(
-                  leading: Icon(Icons.shopping_cart),
-                  title: Text("Orders", style: TextStyle(fontSize: 20)),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return OrdersScreen();
+                    }));
+                  },
+                  leading: Icon(Icons.list_alt_outlined),
+                  title: Text("Orders",
+                      style:
+                          TextStyle(color: Colors.blue.shade900, fontSize: 20)),
                 ),
                 ListTile(
                   onTap: () async {
