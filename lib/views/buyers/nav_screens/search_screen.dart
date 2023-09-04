@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_store/views/buyers/productDetail/product_detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -74,34 +75,41 @@ class _SearchScreenState extends State<SearchScreen> {
                   children: searchedData.map((e) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: Image.network(e['imageUrl'][0]),
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  e['productName'],
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return ProductDetailScreen(productData: e);
+                          }));
+                        },
+                        child: Card(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                height: 100,
+                                width: 100,
+                                child: Image.network(e['imageUrl'][0]),
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    e['productName'],
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  e['productPrice'].toStringAsFixed(2),
-                                  style: TextStyle(
-                                    color: Colors.green.shade900,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
+                                  Text(
+                                    e['productPrice'].toStringAsFixed(2),
+                                    style: TextStyle(
+                                      color: Colors.green.shade900,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );
