@@ -13,74 +13,76 @@ class AccountScreen extends StatelessWidget {
     CollectionReference users = FirebaseFirestore.instance.collection('buyers');
 
     return _auth.currentUser == null
-        ? Scaffold(
-            appBar: AppBar(
-              elevation: 1,
-              backgroundColor: Colors.blue.shade900,
-              title: Text(
-                "Profile",
-                style: TextStyle(letterSpacing: 1.3),
+        ? SingleChildScrollView(
+          child: Scaffold(
+              appBar: AppBar(
+                elevation: 1,
+                backgroundColor: Colors.blue.shade900,
+                title: Text(
+                  "Profile",
+                  style: TextStyle(letterSpacing: 1.3),
+                ),
+                centerTitle: true,
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Icon(Icons.star),
+                  )
+                ],
               ),
-              centerTitle: true,
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(Icons.star),
-                )
-              ],
-            ),
-            body: Column(
-              children: [
-                SizedBox(height: 25),
-                Center(
-                  child: CircleAvatar(
-                    radius: 64,
-                    backgroundColor: Colors.blue.shade900,
-                    child: Icon(
-                      Icons.person,
-                      size: 70,
-                      color: Colors.white,
+              body: Column(
+                children: [
+                  SizedBox(height: 25),
+                  Center(
+                    child: CircleAvatar(
+                      radius: 64,
+                      backgroundColor: Colors.blue.shade900,
+                      child: Icon(
+                        Icons.person,
+                        size: 70,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 25),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Sign in to access profile settings',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(height: 25),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) {
-                      return LoginScreen();
-                    }));
-                  },
-                  child: Container(
-                    height: 40,
-                    width: MediaQuery.of(context).size.width - 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blue.shade900,
-                      borderRadius: BorderRadius.circular(10),
+                  SizedBox(height: 25),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Sign in to access profile settings',
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-                    child: Center(
-                      child: Text(
-                        'Sign in',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
+                  ),
+                  SizedBox(height: 25),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) {
+                        return LoginScreen();
+                      }));
+                    },
+                    child: Container(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width - 200,
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade900,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Sign in',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          )
+        )
         : FutureBuilder<DocumentSnapshot>(
             future: users.doc(FirebaseAuth.instance.currentUser!.uid).get(),
             builder: (BuildContext context,

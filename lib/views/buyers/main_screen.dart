@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
             });
           },
           unselectedItemColor: Colors.black,
-          selectedItemColor: Color.fromARGB(255, 184, 113, 32),
+          selectedItemColor: Colors.blue.shade900,
           items: [
             const BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.home,

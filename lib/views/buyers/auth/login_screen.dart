@@ -4,6 +4,8 @@ import 'package:multi_store/utils/show_snackBar.dart';
 import 'package:multi_store/views/buyers/auth/register_screen.dart';
 import 'package:multi_store/views/buyers/main_screen.dart';
 
+import '../../../vendor/views/auth/vendor_auth.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -122,6 +124,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       return BuyerRegisterScreen();
                     }));
                   }, child: Text("Register"))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Trying to log in as a vendor?"),
+                  TextButton(onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                      return VendorAuthScreen();
+                    }));
+                  }, child: Text("Vendor sign in"))
                 ],
               )
             ],
