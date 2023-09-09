@@ -43,12 +43,12 @@ class _BuyerRegisterScreenState extends State<BuyerRegisterScreen> {
           _isLoading = false;
         });
       });
-      return showSnack(context, "Congratulations, account has been created");
+      return showSnack(context, "Congratulations, account has been created", Colors.green);
     } else {
       setState(() {
         _isLoading = false;
       });
-      return showSnack(context, "Please provide data to all fields");
+      return showSnack(context, "Please provide data to all fields", Colors.red);
     }
   }
 

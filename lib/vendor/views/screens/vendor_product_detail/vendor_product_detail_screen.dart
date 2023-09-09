@@ -137,7 +137,7 @@ class _VendorProductDetailScreenState extends State<VendorProductDetailScreen> {
                 Navigator.pop(context);
               });
             } else {
-              showSnack(context, 'Update quantity and price at least!');
+              showSnack(context, 'Update quantity and price at least!', Colors.red);
             }
           },
           child: Container(

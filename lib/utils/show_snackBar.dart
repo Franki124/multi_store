@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-showSnack(context, String title) {
+showSnack(context, String title, Color color) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    backgroundColor: Colors.blue.shade700,
+    backgroundColor: color,
     content: Text(
       title,
       style: TextStyle(fontWeight: FontWeight.bold),

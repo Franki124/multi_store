@@ -34,13 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
           return MainScreen();
         }));
       } else {
-        return showSnack(context, res);
+        return showSnack(context, res, Colors.red);
       }
     } else {
       setState(() {
         _isLoading = false;
       });
-      return showSnack(context, "Please provide valid information");
+      return showSnack(context, "Please provide valid information", Colors.red);
     }
   }
 

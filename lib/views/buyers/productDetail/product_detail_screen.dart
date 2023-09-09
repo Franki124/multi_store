@@ -173,11 +173,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         padding: const EdgeInsets.all(12.0),
         child: InkWell(
           onTap: _cartProvider.getCartItem
-                  .containsKey(widget.productData['productId'])
+                  .containsKey(widget.productData['productID'])
               ? null
               : () {
                   if (_selectedSize == null) {
-                    return showSnack(context, 'Please select size');
+                    return showSnack(context, 'Please select size', Colors.red);
                   } else {
                     _cartProvider.addProductToCart(
                         widget.productData['productName'],
@@ -191,7 +191,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         widget.productData['scheduleDate']);
 
                     return showSnack(context,
-                        'You added ${widget.productData['productName']} to your cart');
+                        'You added ${widget.productData['productName']} to your cart', Colors.green);
                   }
                 },
           child: Container(
@@ -199,7 +199,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 color: _cartProvider.getCartItem
-                        .containsKey(widget.productData['productId'])
+                        .containsKey(widget.productData['productID'])
                     ? Colors.grey.shade700
                     : Colors.blue.shade900,
                 borderRadius: BorderRadius.circular(10)),
@@ -214,7 +214,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: _cartProvider.getCartItem
-                          .containsKey(widget.productData['productId'])
+                          .containsKey(widget.productData['productID'])
                       ? Text('In cart',
                           style: TextStyle(
                               color: Colors.white,

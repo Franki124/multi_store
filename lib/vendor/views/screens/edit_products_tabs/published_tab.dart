@@ -8,7 +8,7 @@ class PublishedTab extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final Stream<QuerySnapshot> _productsStream = FirebaseFirestore.instance
       .collection('products')
-      .where('vendorId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .where('vendorID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
       .where('approved', isEqualTo: true)
       .snapshots();
 
@@ -58,7 +58,7 @@ class PublishedTab extends StatelessWidget {
                             onPressed: (context) async {
                               await _firestore
                                   .collection('products')
-                                  .doc(vendorProductData['productId'])
+                                  .doc(vendorProductData['productID'])
                                   .update({'approved': false});
                             },
                             backgroundColor: Colors.blue.shade700,
@@ -71,7 +71,7 @@ class PublishedTab extends StatelessWidget {
                             onPressed: (context) async {
                               await _firestore
                                   .collection('products')
-                                  .doc(vendorProductData['productId'])
+                                  .doc(vendorProductData['productID'])
                                   .delete();
                             },
                             backgroundColor: Colors.red,
@@ -95,7 +95,7 @@ class PublishedTab extends StatelessWidget {
                                 height: 80,
                                 width: 80,
                                 child: Image.network(
-                                    vendorProductData['imageUrl'][0]),
+                                    vendorProductData['imageUrlList'][0]),
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

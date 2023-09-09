@@ -11,7 +11,7 @@ class StoreDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _productsStream = FirebaseFirestore.instance
         .collection('products')
-        .where('vendorId', isEqualTo: storeData['vendorId'])
+        .where('vendorID', isEqualTo: storeData['vendorId'])
         .snapshots();
     return Scaffold(
       appBar: AppBar(
