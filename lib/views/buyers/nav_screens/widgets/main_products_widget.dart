@@ -21,7 +21,7 @@ class MainProductsWidget extends StatelessWidget {
         }
 
         return Container(
-          height: 250,
+          height: 350,
           child: GridView.builder(
             itemCount: snapshot.data!.size,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
