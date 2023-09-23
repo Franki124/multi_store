@@ -12,4 +12,4 @@ The app can be accessed as Customer or Vendor, during the sign-in process, the u
 To access any of them user needs to sign up (for vendors it's also necessary to receive admin approval)
 
 ## Screenshots:
-WiP
+![multi_store_app](https://github.com/Franki124/multi_store/assets/58610160/b1dcb9ad-4049-4899-966a-2e62cefbdc06)
